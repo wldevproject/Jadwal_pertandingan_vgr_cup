@@ -350,10 +350,11 @@ h1{
 
 .schedule-match{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);
   gap:8px;
   align-items:center;
-  width:100%;
+  width:min(100%, 300px);
+  margin:0 auto;
 }
 
 .schedule-team{
@@ -670,7 +671,7 @@ h1{
   background:#fff;
   border:1px solid var(--line);
   border-radius:18px;
-  padding:12px;
+  padding:13px;
   box-shadow:0 6px 16px rgba(15,23,42,.04);
 }
 .day-featured{
@@ -710,31 +711,31 @@ h1{
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 .date{
   font-family:"Montserrat", sans-serif;
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
 }
 .day-chip{
-  padding:5px 8px;
+  padding:6px 10px;
   border-radius:999px;
   background:rgba(214,31,99,.08);
   color:var(--accent);
   font-family:"Montserrat", sans-serif;
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
   text-transform:uppercase;
 }
 .rows{
   display:grid;
-  gap:8px;
+  gap:6px;
 }
 .row{
   display:grid;
-  gap:6px;
-  padding:8px 0;
+  gap:4px;
+  padding:8px 0 10px;
   border-bottom:1px solid rgba(226,232,240,.75);
   justify-items:center;
 }
@@ -747,7 +748,7 @@ h1{
 }
 .time{
   font-family:"Montserrat", sans-serif;
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
   color:var(--accent);
   letter-spacing:.04em;
@@ -756,10 +757,11 @@ h1{
 }
 .row-match{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);
-  gap:10px;
+  grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr);
+  gap:8px;
   align-items:center;
-  width:min(100%, 360px);
+  width:min(100%, 290px);
+  margin:0 auto;
 }
 .team-left{
   text-align:center;
@@ -779,7 +781,7 @@ h1{
 }
 .vs{
   color:var(--muted-2);
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
   text-align:center;
 }
@@ -1220,16 +1222,34 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   .lead-schedule{
     margin-top:16px;
   }
+  .days{
+    gap:12px;
+  }
+  .day{
+    padding:12px;
+    border-radius:20px;
+  }
+  .day-head{
+    margin-bottom:10px;
+  }
+  .date{
+    font-size:12px;
+  }
+  .day-chip{
+    padding:5px 9px;
+    font-size:9px;
+  }
   .schedule-row{
     gap:7px;
     padding:9px 0;
   }
   .schedule-match{
     grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);
-    gap:8px;
+    gap:7px;
+    width:min(100%, 240px);
   }
   .schedule-team{
-    font-size:13px;
+    font-size:12px;
   }
   .section{
     margin-top:8px;
@@ -1251,19 +1271,21 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     background:none;
   }
   .row{
-    gap:5px;
-    padding:7px 0;
+    gap:4px;
+    padding:6px 0 8px;
   }
   .row-time{
     justify-content:center;
   }
   .time{
     width:auto;
+    font-size:10px;
   }
   .row-match{
-    grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);
-    gap:10px;
-    width:100%;
+    grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);
+    gap:7px;
+    width:min(100%, 240px);
+    margin:0 auto;
   }
   .team-left,
   .team-right,
@@ -1273,16 +1295,17 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .team-left,
   .schedule-left{
-    text-align:right;
+    text-align:center;
   }
   .team-right,
   .schedule-right{
-    text-align:left;
+    text-align:center;
   }
   .vs,
   .schedule-vs{
     justify-self:center;
     text-align:center;
+    font-size:10px;
   }
   .tabs{
     gap:5px;
