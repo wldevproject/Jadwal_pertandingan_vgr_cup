@@ -1,0 +1,5 @@
+@import './site-shell.css';
+
+#app {
+  min-height: 100vh;
+}

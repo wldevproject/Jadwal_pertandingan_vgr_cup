@@ -1,4 +1,4 @@
-window.VGRScrapedResults = {
+{
   "source": "https://vgr5arena.my.id",
   "items": [
     {
@@ -1220,4 +1220,4 @@ window.VGRScrapedResults = {
       "url": "https://vgr5arena.my.id/index.php?p=competition&id=31&cat=16"
     }
   ]
-};
+}

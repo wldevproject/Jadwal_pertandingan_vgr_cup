@@ -2,7 +2,7 @@
   "name": "VGR 5 Badminton Cup 2026",
   "short_name": "VGR 5 Cup",
   "description": "Papan skor, jadwal, dan klasemen turnamen badminton VGR 5 Badminton Cup 2026.",
-  "start_url": "./result-panel.html",
+  "start_url": "./index.html#/results?cat=16",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f5fa",
