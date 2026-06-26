@@ -294,6 +294,14 @@ h1{
   box-shadow:0 14px 28px rgba(15,23,42,.16);
 }
 
+.lead-home{
+  overflow:hidden;
+}
+
+.lead-mobile-home{
+  display:none;
+}
+
 .lead-schedule{
   margin-top:18px;
 }
@@ -879,6 +887,10 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   text-align:center;
 }
 
+.results-mobile-only{
+  display:none;
+}
+
 .mobile-nav{
   display:none;
 }
@@ -906,6 +918,18 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .lead{
     margin-top:12px;
+  }
+  .lead-desktop-only{
+    display:none;
+  }
+  .lead-mobile-home{
+    display:block;
+  }
+  .results-desktop-only{
+    display:none;
+  }
+  .results-mobile-only{
+    display:block;
   }
   .lead-schedule{
     margin-top:16px;
@@ -973,6 +997,113 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .mobile-nav-label{
     line-height:1;
+  }
+
+  .mobile-home-head{
+    align-items:flex-start;
+  }
+  .mobile-home-kicker{
+    margin-top:4px;
+    color:#d7dde8;
+    font-size:11px;
+    line-height:1.45;
+  }
+  .mobile-home-hero{
+    display:grid;
+    gap:10px;
+    padding:12px;
+    border-radius:18px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .mobile-home-hero-copy{
+    display:grid;
+    gap:4px;
+  }
+  .mobile-home-hero-copy strong{
+    font-family:"Montserrat", sans-serif;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:-.02em;
+  }
+  .mobile-home-hero-copy span{
+    font-size:11px;
+    color:#d7dde8;
+    line-height:1.5;
+  }
+  .mobile-home-badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .mobile-home-badge{
+    padding:6px 9px;
+    border-radius:999px;
+    background:rgba(214,31,99,.16);
+    color:#ff7db0;
+    font-family:"Montserrat", sans-serif;
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .mobile-home-grid{
+    display:grid;
+    gap:8px;
+    margin-top:10px;
+  }
+  .mobile-home-card{
+    display:grid;
+    gap:6px;
+    padding:12px;
+    border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .mobile-home-card-label{
+    font-family:"Montserrat", sans-serif;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:#d7dde8;
+  }
+  .mobile-home-card strong{
+    font-family:"Montserrat", sans-serif;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:-.02em;
+    color:#fff;
+  }
+  .mobile-home-card span,
+  .mobile-home-card small{
+    color:#d7dde8;
+    font-size:11px;
+    line-height:1.45;
+  }
+  .mobile-home-card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-top:4px;
+  }
+  .mobile-home-pill{
+    padding:6px 9px;
+    border-radius:999px;
+    background:rgba(214,31,99,.16);
+    color:#ff7db0;
+    font-family:"Montserrat", sans-serif;
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .mobile-home-link{
+    color:#fff;
+    font-size:10px;
+    font-weight:800;
+    text-decoration:none;
+    letter-spacing:.02em;
   }
 }
 
