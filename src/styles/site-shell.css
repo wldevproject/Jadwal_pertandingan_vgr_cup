@@ -26,6 +26,62 @@ body{
   font-family:"Poppins", system-ui, sans-serif;
 }
 
+.pwa-banner{
+  max-width:1180px;
+  margin:12px auto 0;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  backdrop-filter:blur(12px);
+}
+.pwa-banner.offline{
+  border-color:rgba(214,31,99,.2);
+  background:rgba(255,245,248,.96);
+}
+.pwa-banner.update{
+  border-color:rgba(23,166,115,.2);
+  background:rgba(244,255,250,.96);
+}
+.pwa-banner-copy{
+  display:grid;
+  gap:3px;
+}
+.pwa-banner-copy strong{
+  font-family:"Montserrat", sans-serif;
+  font-size:12px;
+  font-weight:800;
+  color:var(--text);
+  letter-spacing:.02em;
+}
+.pwa-banner-copy span{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.45;
+}
+.pwa-banner-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.pwa-banner-pill{
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-family:"Montserrat", sans-serif;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
 .wrap{
   max-width:1180px;
   margin:0 auto;
@@ -835,6 +891,16 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
 }
 
 @media (max-width: 760px){
+  .pwa-banner{
+    margin:10px 10px 0;
+    padding:10px 12px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .pwa-banner-actions{
+    width:100%;
+    justify-content:space-between;
+  }
   .wrap{
     padding-bottom:calc(88px + env(safe-area-inset-bottom));
   }
@@ -911,6 +977,9 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
 }
 
 @media (max-width: 520px){
+  .pwa-banner{
+    margin:8px 10px 0;
+  }
   .wrap{
     padding:10px;
     padding-bottom:calc(86px + env(safe-area-inset-bottom));

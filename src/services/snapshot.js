@@ -1,4 +1,5 @@
 import fallbackSnapshot from '../data/scraped-results.json';
+import snapshotUrl from '../data/scraped-results.json?url';
 
 const CACHE_KEY = 'vgr5cup2026.payload';
 
@@ -29,7 +30,7 @@ export function writeCachedSnapshot(payload) {
 }
 
 async function fetchSnapshot() {
-  const response = await fetch('./scraped-results.json', { cache: 'no-store' });
+  const response = await fetch(snapshotUrl, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error('Failed to load scraped-results.json');
   }
