@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AppShell from '../components/AppShell.vue';
 import MatchCard from '../components/MatchCard.vue';
@@ -36,6 +36,82 @@ const nextMatchLabel = computed(() => (nextMatch.value ? `${nextMatch.value.row.
 const featuredGroup = computed(() => {
   const groups = Array.isArray(currentCat.value.groups) ? currentCat.value.groups : [];
   return groups[0] || null;
+});
+
+const mobileHomeSlides = computed(() => [
+  {
+    key: 'next',
+    label: 'Pertandingan berikutnya',
+    title: nextMatchLabel.value,
+    description: nextMatch.value ? `${nextMatch.value.day.date} - ${nextMatch.value.row.time}` : 'Jadwal belum tersedia',
+    meta: nextCountdown.value,
+    badge: 'Jadwal',
+    variant: 'next',
+    to: { name: 'schedule', query: { cat: String(activeCat.value) } },
+    cta: 'Lihat jadwal',
+  },
+  {
+    key: 'score',
+    label: 'Skor terakhir',
+    title: latestSummary.value?.a || 'Belum ada skor',
+    description: latestSummary.value ? `${latestSummary.value.left} vs ${latestSummary.value.right}` : 'Tunggu hasil terbaru masuk',
+    meta: latestSummary.value?.b || 'Hasil terbaru',
+    badge: latestSummary.value?.status || 'FT',
+    variant: 'score',
+    to: { name: 'results', query: { cat: String(activeCat.value) } },
+    cta: 'Detail hasil',
+  },
+  {
+    key: 'group',
+    label: 'Ringkasan klasemen',
+    title: featuredGroup.value?.group || 'Klasemen',
+    description: featuredGroup.value?.rows?.[0]?.team || 'Belum ada data grup',
+    meta: featuredGroup.value?.rows?.[0]?.form || 'Form belum tersedia',
+    badge: `Grup ${totalGroups.value}`,
+    variant: 'group',
+    to: { name: 'groups', query: { cat: String(activeCat.value) } },
+    cta: 'Lihat grup',
+  },
+]);
+
+const carouselRef = ref(null);
+const activeSlide = ref(0);
+let carouselTimer = null;
+
+function scrollToSlide(index, behavior = 'smooth') {
+  const el = carouselRef.value;
+  const slideCount = mobileHomeSlides.value.length;
+  if (!el || !slideCount) return;
+  const nextIndex = ((index % slideCount) + slideCount) % slideCount;
+  const width = el.clientWidth || 1;
+  el.scrollTo({ left: nextIndex * width, behavior });
+  activeSlide.value = nextIndex;
+}
+
+function syncSlideFromScroll() {
+  const el = carouselRef.value;
+  if (!el) return;
+  const width = el.clientWidth || 1;
+  const index = Math.round(el.scrollLeft / width);
+  activeSlide.value = Math.max(0, Math.min(index, mobileHomeSlides.value.length - 1));
+}
+
+onMounted(() => {
+  const reduceMotion = typeof window !== 'undefined'
+    && window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion) {
+    carouselTimer = window.setInterval(() => {
+      scrollToSlide(activeSlide.value + 1);
+    }, 5500);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (carouselTimer) {
+    window.clearInterval(carouselTimer);
+  }
 });
 </script>
 
@@ -91,36 +167,41 @@ const featuredGroup = computed(() => {
             <span class="mobile-home-badge">Jadwal {{ totalScheduleRows }}</span>
           </div>
         </div>
-        <div class="mobile-home-grid">
-          <article class="mobile-home-card mobile-home-next">
-            <div class="mobile-home-card-label">Pertandingan berikutnya</div>
-            <strong>{{ nextMatchLabel }}</strong>
-            <span>{{ nextMatch ? nextMatch.day.date + ' - ' + nextMatch.row.time : 'Jadwal belum tersedia' }}</span>
-            <div class="mobile-home-card-foot">
-              <span class="mobile-home-pill">{{ nextCountdown }}</span>
-              <RouterLink class="mobile-home-link" :to="{ name: 'schedule', query: { cat: String(activeCat) } }">Lihat jadwal</RouterLink>
-            </div>
-          </article>
-          <article class="mobile-home-card mobile-home-score">
-            <div class="mobile-home-card-label">Skor terakhir</div>
-            <strong>{{ latestSummary?.a }}</strong>
-            <span>{{ latestSummary?.left }} vs {{ latestSummary?.right }}</span>
-            <small>{{ latestSummary?.b }}</small>
-            <div class="mobile-home-card-foot">
-              <span class="mobile-home-pill">{{ latestSummary?.status }}</span>
-              <RouterLink class="mobile-home-link" :to="{ name: 'results', query: { cat: String(activeCat) } }">Detail hasil</RouterLink>
-            </div>
-          </article>
-          <article class="mobile-home-card mobile-home-group" v-if="featuredGroup">
-            <div class="mobile-home-card-label">Grup terdekat</div>
-            <strong>{{ featuredGroup.group }}</strong>
-            <span>{{ featuredGroup.rows?.[0]?.team }} unggulan</span>
-            <small>{{ featuredGroup.rows?.[0]?.form || 'Form belum tersedia' }}</small>
-            <div class="mobile-home-card-foot">
-              <span class="mobile-home-pill">Klasemen</span>
-              <RouterLink class="mobile-home-link" :to="{ name: 'groups', query: { cat: String(activeCat) } }">Lihat grup</RouterLink>
-            </div>
-          </article>
+        <div class="mobile-home-carousel-shell">
+          <div
+            ref="carouselRef"
+            class="mobile-home-carousel"
+            @scroll.passive="syncSlideFromScroll"
+          >
+            <article
+              v-for="slide in mobileHomeSlides"
+              :key="slide.key"
+              class="mobile-home-card mobile-home-panel"
+              :class="`mobile-home-${slide.variant}`"
+            >
+              <div class="mobile-home-card-label">{{ slide.label }}</div>
+              <div class="mobile-home-panel-body">
+                <strong>{{ slide.title }}</strong>
+                <span>{{ slide.description }}</span>
+                <small>{{ slide.meta }}</small>
+              </div>
+              <div class="mobile-home-card-foot">
+                <span class="mobile-home-pill">{{ slide.badge }}</span>
+                <RouterLink class="mobile-home-link" :to="slide.to">{{ slide.cta }}</RouterLink>
+              </div>
+            </article>
+          </div>
+          <div class="mobile-home-dots" aria-label="Navigasi carousel">
+            <button
+              v-for="(slide, index) in mobileHomeSlides"
+              :key="slide.key + '-dot'"
+              class="mobile-home-dot"
+              :class="{ active: activeSlide === index }"
+              type="button"
+              :aria-label="`Lihat ${slide.label}`"
+              @click="scrollToSlide(index)"
+            />
+          </div>
         </div>
       </section>
       <section v-else-if="leadMatch" class="lead lead-desktop-only" aria-label="hasil terbaru">
