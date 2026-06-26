@@ -29,7 +29,7 @@ const groups = computed(() => Array.isArray(currentCat.value.groups) ? currentCa
     :loading="store.loading"
     :note="pageCopy.note"
   >
-    <template #actions>
+    <template #statusActions>
       <button class="action-btn primary" data-install-pwa hidden>Pasang Aplikasi</button>
     </template>
 

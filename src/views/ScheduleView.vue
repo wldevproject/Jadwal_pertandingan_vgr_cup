@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
     :loading="store.loading"
     :note="pageCopy.note"
   >
-    <template #actions>
+    <template #statusActions>
       <button
         v-if="pwa.installAvailable"
         class="action-btn action-btn-icon primary"

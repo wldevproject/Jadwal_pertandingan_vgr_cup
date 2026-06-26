@@ -140,9 +140,18 @@ h1{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:8px;
   margin-top:12px;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+}
+
+.status-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+  margin-left:auto;
+  flex-shrink:0;
 }
 
 .status{
@@ -158,13 +167,6 @@ h1{
   letter-spacing:.02em;
 }
 .status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-
-.action-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:12px;
-}
 
 .action-btn{
   appearance:none;
@@ -183,8 +185,8 @@ h1{
 }
 
 .action-btn-icon{
-  width:38px;
-  height:38px;
+  width:34px;
+  height:34px;
   padding:0;
   display:inline-flex;
   align-items:center;
@@ -348,9 +350,10 @@ h1{
 
 .schedule-match{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);
-  gap:10px;
+  grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);
+  gap:8px;
   align-items:center;
+  width:100%;
 }
 
 .schedule-team{
@@ -370,6 +373,7 @@ h1{
   font-size:11px;
   font-weight:800;
   color:#d7dde8;
+  justify-self:center;
 }
 
 .lead-head{
@@ -974,9 +978,11 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     padding:7px 9px;
     font-size:9px;
   }
-  .action-btn-icon{
-    width:40px;
-    height:40px;
+  .status-row{
+    gap:8px;
+  }
+  .status-actions{
+    gap:6px;
   }
   .tab-full{display:none}
   .tab-short{display:inline}
@@ -1255,9 +1261,28 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     width:auto;
   }
   .row-match{
-    grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);
-    gap:8px;
-    width:min(100%, 300px);
+    grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);
+    gap:10px;
+    width:100%;
+  }
+  .team-left,
+  .team-right,
+  .schedule-left,
+  .schedule-right{
+    min-width:0;
+  }
+  .team-left,
+  .schedule-left{
+    text-align:right;
+  }
+  .team-right,
+  .schedule-right{
+    text-align:left;
+  }
+  .vs,
+  .schedule-vs{
+    justify-self:center;
+    text-align:center;
   }
   .tabs{
     gap:5px;

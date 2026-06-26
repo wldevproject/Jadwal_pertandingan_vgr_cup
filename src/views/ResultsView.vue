@@ -3,8 +3,9 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AppShell from '../components/AppShell.vue';
 import MatchCard from '../components/MatchCard.vue';
+import { usePwaActions } from '../composables/usePwaActions.js';
 import { useCompetitionStore } from '../stores/competition.js';
-import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, formatMatchScore, getPageCopy, parseCategory } from '../utils/competition.js';
+import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, formatMatchScore, getPageCopy, iconSvg, parseCategory } from '../utils/competition.js';
 
 const store = useCompetitionStore();
 const route = useRoute();
@@ -37,6 +38,7 @@ const featuredGroup = computed(() => {
   const groups = Array.isArray(currentCat.value.groups) ? currentCat.value.groups : [];
   return groups[0] || null;
 });
+const pwa = usePwaActions(() => null);
 
 const mobileHomeSlides = computed(() => [
   {
@@ -127,8 +129,18 @@ onBeforeUnmount(() => {
     :loading="store.loading"
     :note="pageCopy.note"
   >
-    <template #actions>
-      <button class="action-btn primary" data-install-pwa hidden>Pasang Aplikasi</button>
+    <template #statusActions>
+      <button
+        v-if="pwa.installAvailable"
+        class="action-btn action-btn-icon primary"
+        data-install-pwa
+        type="button"
+        aria-label="Pasang aplikasi"
+        title="Pasang aplikasi"
+        @click="pwa.promptInstall"
+      >
+        <span class="action-btn-icon-mark" v-html="iconSvg('install')" />
+      </button>
     </template>
 
     <template #lead>

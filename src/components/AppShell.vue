@@ -29,9 +29,9 @@ const mobileNavItems = computed(() => buildMobileNav(props.page, props.activeCat
       <p class="sub">{{ subtitle }}</p>
       <div class="status-row">
         <div class="status">{{ loading ? 'Memuat' : status }}</div>
-      </div>
-      <div v-if="$slots.actions" class="action-row">
-        <slot name="actions" />
+        <div v-if="$slots.statusActions" class="status-actions">
+          <slot name="statusActions" />
+        </div>
       </div>
       <nav v-if="tabs.length" class="tabs" aria-label="Kategori">
         <RouterLink
