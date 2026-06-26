@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="VGR 5 Badminton Cup 2026">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d61f63"/>
+      <stop offset="1" stop-color="#7d1338"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="124" fill="#101828"/>
+  <rect x="40" y="40" width="432" height="432" rx="108" fill="url(#g)"/>
+  <circle cx="256" cy="210" r="96" fill="#fff" opacity=".96"/>
+  <path d="M220 126c15 18 22 44 22 84s-7 66-22 84c-10-19-16-45-16-84s6-65 16-84Z" fill="#101828" opacity=".95"/>
+  <path d="M292 126c-15 18-22 44-22 84s7 66 22 84c10-19 16-45 16-84s-6-65-16-84Z" fill="#101828" opacity=".95"/>
+  <path d="M176 174c23 8 46 12 80 12s57-4 80-12" fill="none" stroke="#101828" stroke-width="16" stroke-linecap="round"/>
+  <path d="M176 210c23 8 46 12 80 12s57-4 80-12" fill="none" stroke="#101828" stroke-width="16" stroke-linecap="round"/>
+  <path d="M176 246c23 8 46 12 80 12s57-4 80-12" fill="none" stroke="#101828" stroke-width="16" stroke-linecap="round"/>
+  <rect x="146" y="330" width="220" height="76" rx="38" fill="rgba(255,255,255,.16)"/>
+  <text x="256" y="382" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="48" font-weight="800" fill="#fff">VGR 5</text>
+</svg>

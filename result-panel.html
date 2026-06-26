@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VGR 5 Badminton Cup 2026 - Hasil</title>
+  <meta name="theme-color" content="#d61f63" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./app-icon.svg" />
+  <link rel="stylesheet" href="./site-shell.css" />
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./scraped-results.js"></script>
+  <script src="./site-shell.js"></script>
+  <script src="./pwa.js"></script>
+  <script>
+    function renderResults(payload) {
+      const app = document.getElementById('app');
+      const items = payload.items || [];
+      const activeCat = Number((location.hash.match(/cat-(\d+)/) || [])[1]) || 16;
+      const currentCat = items.find((item) => item.cat === activeCat) || items[0] || { category: 'Kategori', label: 'Kategori', results: [] };
+      const leadMatch = currentCat && currentCat.results && currentCat.results[0];
+      const leadScore = leadMatch ? window.VGRSite.formatMatchScore(leadMatch) : null;
+      const leadHtml = leadMatch ? `
+        <section class="lead" aria-label="hasil terbaru">
+          <div class="lead-head">
+            <div class="lead-title">Skor Terakhir</div>
+            <div class="lead-tag">${leadScore.status}</div>
+          </div>
+          <div class="lead-grid">
+            <div class="lead-list">
+              <div class="lead-row"><div class="lead-team">${leadMatch.a}</div><div class="lead-time">${leadScore.left}</div></div>
+              <div class="lead-row"><div class="lead-team">${leadMatch.b}</div><div class="lead-time">${leadScore.right}</div></div>
+            </div>
+            <div class="lead-meta">
+              <strong>${leadScore.status}</strong>
+              <span>Skor akhir</span>
+            </div>
+          </div>
+        </section>` : '';
+
+      app.innerHTML = window.VGRSite.shell({
+        eyebrow: 'Hasil Pertandingan',
+        title: 'VGR 5 Badminton Cup 2026',
+        subtitle: 'Halaman ini menampilkan skor pertandingan terbaru.',
+        status: 'Aktif',
+        tabs: window.VGRSite.catTabHtml(activeCat, './result-panel.html'),
+        actions: `
+          <button class="action-btn primary" data-install-pwa hidden>Pasang Aplikasi</button>
+        `,
+        lead: leadHtml,
+        main: `
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h2>Hasil</h2>
+                <p>Skor pertandingan terbaru dari setiap kategori.</p>
+              </div>
+              <div class="chip">${currentCat?.category || 'Kategori'}</div>
+            </div>
+            <div class="card-grid">
+              ${window.VGRSite.renderMatchCards(currentCat)}
+            </div>
+          </section>
+        `,
+        note: 'Halaman ini menampilkan skor pertandingan terbaru.',
+      });
+    }
+    (async () => {
+      const app = document.getElementById('app');
+      const activeCat = Number((location.hash.match(/cat-(\d+)/) || [])[1]) || 16;
+      app.innerHTML = window.VGRSite.loadingShell({
+        kind: 'results',
+        eyebrow: 'Hasil Pertandingan',
+        title: 'VGR 5 Badminton Cup 2026',
+        subtitle: 'Halaman ini menampilkan skor pertandingan terbaru.',
+        tabs: window.VGRSite.catTabHtml(activeCat, './result-panel.html'),
+      });
+      try {
+        renderResults(await window.VGRSite.getPayload());
+        window.VGRSite.startAutoRefresh(renderResults, 15000);
+      } catch (err) {
+        app.innerHTML = `<div class="wrap"><div class="top"><div class="eyebrow">Hasil Pertandingan</div><h1>VGR 5 Badminton Cup 2026</h1><p class="sub">Halaman ini belum bisa dibuka.</p><div class="status-row"><div class="status">Tidak aktif</div></div></div></div>`;
+      }
+    })();
+  </script>
+</body>
+</html>

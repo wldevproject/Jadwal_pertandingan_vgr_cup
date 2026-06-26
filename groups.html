@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VGR 5 Badminton Cup 2026 - Klasemen</title>
+  <meta name="theme-color" content="#d61f63" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./app-icon.svg" />
+  <link rel="stylesheet" href="./site-shell.css" />
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./scraped-results.js"></script>
+  <script src="./site-shell.js"></script>
+  <script src="./pwa.js"></script>
+  <script>
+    function renderGroupsPage(payload) {
+      const app = document.getElementById('app');
+      const items = payload.items || [];
+      const activeCat = Number((location.hash.match(/cat-(\d+)/) || [])[1]) || 16;
+      const item = items.find((it) => it.cat === activeCat) || items[0];
+      const groups = item && item.groups ? item.groups : [];
+
+      app.innerHTML = window.VGRSite.shell({
+        eyebrow: 'Klasemen Grup',
+        title: 'VGR 5 Badminton Cup 2026',
+        subtitle: 'Halaman ini menampilkan posisi tiap grup dan urutan tim.',
+        status: 'Aktif',
+        tabs: window.VGRSite.catTabHtml(activeCat, './groups.html'),
+        actions: `
+          <button class="action-btn primary" data-install-pwa hidden>Pasang Aplikasi</button>
+        `,
+        lead: `
+          <section class="lead" aria-label="ringkasan klasemen">
+            <div class="lead-head">
+              <div class="lead-title">Ringkasan Grup</div>
+              <div class="lead-tag">Aktif</div>
+            </div>
+            <div class="lead-grid">
+              <div class="lead-list">
+                <div class="lead-row"><div class="lead-team">${groups.length} grup</div><div class="lead-time">aktif</div></div>
+                <div class="lead-row"><div class="lead-team">2 teratas lolos</div><div class="lead-time">tiap grup</div></div>
+              </div>
+              <div class="lead-meta"><strong>${groups.length * 2}</strong><span>posisi</span></div>
+            </div>
+          </section>
+        `,
+        main: window.VGRSite.renderGroups(groups),
+        note: 'Halaman ini menampilkan posisi tiap grup dan urutan tim.',
+      });
+    }
+    (async () => {
+      const app = document.getElementById('app');
+      const activeCat = Number((location.hash.match(/cat-(\d+)/) || [])[1]) || 16;
+      app.innerHTML = window.VGRSite.loadingShell({
+        kind: 'groups',
+        eyebrow: 'Klasemen Grup',
+        title: 'VGR 5 Badminton Cup 2026',
+        subtitle: 'Halaman ini menampilkan posisi tiap grup dan urutan tim.',
+        tabs: window.VGRSite.catTabHtml(activeCat, './groups.html'),
+      });
+      try {
+        renderGroupsPage(await window.VGRSite.getPayload());
+        window.VGRSite.startAutoRefresh(renderGroupsPage, 15000);
+      } catch (err) {
+        app.innerHTML = `<div class="wrap"><div class="top"><div class="eyebrow">Klasemen Grup</div><h1>VGR 5 Badminton Cup 2026</h1><p class="sub">Halaman ini belum bisa dibuka.</p><div class="status-row"><div class="status">Tidak aktif</div></div></div></div>`;
+      }
+    })();
+  </script>
+</body>
+</html>
