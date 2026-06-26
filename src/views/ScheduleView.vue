@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import AppShell from '../components/AppShell.vue';
 import ScheduleDay from '../components/ScheduleDay.vue';
 import { useCompetitionStore } from '../stores/competition.js';
-import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, getPageCopy, parseCategory } from '../utils/competition.js';
+import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, getPageCopy, iconSvg, parseCategory } from '../utils/competition.js';
 import { usePwaActions } from '../composables/usePwaActions.js';
 
 const store = useCompetitionStore();
@@ -65,9 +65,38 @@ onBeforeUnmount(() => {
     :note="pageCopy.note"
   >
     <template #actions>
-      <button v-if="pwa.installAvailable" class="action-btn primary" data-install-pwa @click="pwa.promptInstall">Pasang Aplikasi</button>
-      <button class="action-btn" data-save-calendar @click="pwa.saveCalendar">Simpan Jadwal</button>
-      <button class="action-btn" data-remind-next :disabled="!nextMatch" @click="pwa.requestReminder">Ingatkan</button>
+      <button
+        v-if="pwa.installAvailable"
+        class="action-btn action-btn-icon primary"
+        data-install-pwa
+        type="button"
+        aria-label="Pasang aplikasi"
+        title="Pasang aplikasi"
+        @click="pwa.promptInstall"
+      >
+        <span class="action-btn-icon-mark" v-html="iconSvg('install')" />
+      </button>
+      <button
+        class="action-btn action-btn-icon"
+        data-save-calendar
+        type="button"
+        aria-label="Simpan jadwal"
+        title="Simpan jadwal"
+        @click="pwa.saveCalendar"
+      >
+        <span class="action-btn-icon-mark" v-html="iconSvg('download')" />
+      </button>
+      <button
+        class="action-btn action-btn-icon"
+        data-remind-next
+        type="button"
+        :disabled="!nextMatch"
+        aria-label="Ingatkan pertandingan berikutnya"
+        title="Ingatkan pertandingan berikutnya"
+        @click="pwa.requestReminder"
+      >
+        <span class="action-btn-icon-mark" v-html="iconSvg('bell')" />
+      </button>
     </template>
 
     <template #lead>

@@ -177,6 +177,18 @@ export function formatCountdown(diffMs) {
 }
 
 export function iconSvg(name) {
+  if (name === 'install') {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42L11 11.59V4a1 1 0 0 1 1-1Zm-7 13a1 1 0 0 1 1 1v2h12v-2a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z"/></svg>';
+  }
+
+  if (name === 'download') {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v8.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42L11 12.59V4a1 1 0 0 1 1-1Zm-6 14a1 1 0 0 1 1 1v1h10v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z"/></svg>';
+  }
+
+  if (name === 'bell') {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v2.1c0 .8-.24 1.57-.68 2.23L4.6 13.1A1.5 1.5 0 0 0 5.86 15.4H18.14a1.5 1.5 0 0 0 1.26-2.3l-1.72-2.77A4.05 4.05 0 0 1 17 9.1V7a5 5 0 0 0-5-5Zm0 19a2.5 2.5 0 0 0 2.45-2H9.55A2.5 2.5 0 0 0 12 21Z"/></svg>';
+  }
+
   if (name === 'calendar') {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A1.5 1.5 0 0 1 21 5.5v13A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12 7H5v9.5h14V9Z"/></svg>';
   }
