@@ -1005,15 +1005,17 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   .tab-short{display:inline}
   .mobile-nav-shell{
     position:fixed;
-    left:10px;
-    right:10px;
-    bottom:calc(10px + env(safe-area-inset-bottom));
+    left:0;
+    right:0;
+    bottom:0;
     z-index:20;
     display:block;
     margin-top:0;
-    padding:6px;
+    padding:0px;
     border:1px solid var(--line);
-    border-radius:18px;
+    /* border-radius:18px; */
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
     background:rgba(255,255,255,.94);
     box-shadow:0 10px 24px rgba(15,23,42,.10);
     backdrop-filter:blur(12px);
