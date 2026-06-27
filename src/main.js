@@ -11,6 +11,12 @@ import { getCategorySlug, parseCategory } from './utils/competition.js';
 function migrateLegacyHashRoute() {
   if (typeof window === 'undefined') return;
 
+  const redirect = new URLSearchParams(window.location.search).get('redirect');
+  if (redirect) {
+    window.history.replaceState({}, '', redirect);
+    return;
+  }
+
   const hash = window.location.hash || '';
   if (!hash.startsWith('#/')) return;
 
