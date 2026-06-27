@@ -1012,6 +1012,9 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     display:block;
     margin-top:0;
     padding:0px;
+    padding-right:calc(12px + env(safe-area-inset-right));
+    padding-left:calc(12px + env(safe-area-inset-left));
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
     border:1px solid var(--line);
     /* border-radius:18px; */
     border-top-left-radius:18px;
