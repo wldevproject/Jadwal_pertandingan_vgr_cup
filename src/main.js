@@ -35,6 +35,9 @@ function migrateLegacyHashRoute() {
 
 const app = createApp(App);
 
+// Clean up any legacy hash/query redirect before Vue Router boots.
+migrateLegacyHashRoute();
+
 app.use(createPinia());
 app.use(Quasar, {
   config: {
@@ -50,8 +53,6 @@ app.use(Quasar, {
   },
 });
 app.use(router);
-
-migrateLegacyHashRoute();
 
 router.isReady().then(() => {
   app.mount('#app');
