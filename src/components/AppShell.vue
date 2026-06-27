@@ -28,31 +28,32 @@ const desktopMenuOpen = ref(false);
             <h1>{{ title }}</h1>
           </div>
           <div class="desktop-nav-wrap">
-            <QBtn
-              round
-              flat
+            <button
               class="desktop-nav-trigger"
-              icon="menu"
+              type="button"
               aria-label="Pilihan halaman"
+              :aria-expanded="desktopMenuOpen"
+              @click="desktopMenuOpen = !desktopMenuOpen"
             >
-              <QMenu v-model="desktopMenuOpen" anchor="bottom right" self="top right">
-                <div class="desktop-nav-menu" role="menu" aria-label="Pilihan halaman">
-                  <RouterLink
-                    v-for="item in mobileNavItems"
-                    :key="item.to.name"
-                    class="desktop-nav-item"
-                    :class="{ active: item.active }"
-                    :to="item.to"
-                    role="menuitem"
-                    :aria-current="item.active ? 'page' : undefined"
-                    @click="desktopMenuOpen = false"
-                  >
-                    <QIcon :name="item.icon" class="desktop-nav-icon" />
-                    <span>{{ item.label }}</span>
-                  </RouterLink>
-                </div>
-              </QMenu>
-            </QBtn>
+              <QIcon name="menu" />
+            </button>
+            <div v-if="desktopMenuOpen" class="desktop-nav-popover">
+              <div class="desktop-nav-menu" role="menu" aria-label="Pilihan halaman">
+                <RouterLink
+                  v-for="item in mobileNavItems"
+                  :key="item.to.name"
+                  class="desktop-nav-item"
+                  :class="{ active: item.active }"
+                  :to="item.to"
+                  role="menuitem"
+                  :aria-current="item.active ? 'page' : undefined"
+                  @click="desktopMenuOpen = false"
+                >
+                  <QIcon :name="item.icon" class="desktop-nav-icon" />
+                  <span>{{ item.label }}</span>
+                </RouterLink>
+              </div>
+            </div>
           </div>
         </div>
         <p class="sub">{{ subtitle }}</p>

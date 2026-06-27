@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
-import { loadSnapshot } from '../services/snapshot.js';
+import { loadSnapshot, readCachedSnapshot } from '../services/snapshot.js';
 import { selectItem } from '../utils/competition.js';
+
+const initialSnapshot = readCachedSnapshot();
 
 export const useCompetitionStore = defineStore('competition', {
   state: () => ({
-    snapshot: null,
-    loading: true,
+    snapshot: initialSnapshot,
+    loading: !initialSnapshot,
     refreshing: false,
     error: null,
     lastUpdatedAt: null,
@@ -19,7 +21,11 @@ export const useCompetitionStore = defineStore('competition', {
 
   actions: {
     async init() {
-      if (this.snapshot) return this.snapshot;
+      if (this.snapshot) {
+        this.loading = false;
+        void this.refresh();
+        return this.snapshot;
+      }
 
       this.loading = true;
       try {

@@ -13,22 +13,22 @@ const PAGE_COPY = {
   results: {
     eyebrow: 'Hasil Pertandingan',
     title: APP_NAME,
-    subtitle: 'Halaman ini menampilkan skor pertandingan terbaru.',
-    note: 'Halaman ini menampilkan skor pertandingan terbaru.',
+    subtitle: 'Pantau skor terbaru, pertandingan terdekat, dan klasemen tiap kategori.',
+    note: 'Pantau skor terbaru, pertandingan terdekat, dan klasemen tiap kategori.',
     status: 'Aktif',
   },
   schedule: {
     eyebrow: 'Jadwal Pertandingan',
     title: APP_NAME,
-    subtitle: 'Halaman ini menampilkan urutan pertandingan yang akan dimainkan.',
-    note: 'Halaman ini menampilkan urutan pertandingan yang akan dimainkan.',
+    subtitle: 'Cek urutan pertandingan yang akan dimainkan pada tiap kategori.',
+    note: 'Cek urutan pertandingan yang akan dimainkan pada tiap kategori.',
     status: 'Aktif',
   },
   groups: {
     eyebrow: 'Klasemen Grup',
     title: APP_NAME,
-    subtitle: 'Halaman ini menampilkan posisi tiap grup dan urutan tim.',
-    note: 'Halaman ini menampilkan posisi tiap grup dan urutan tim.',
+    subtitle: 'Lihat posisi tim, perolehan poin, dan siapa yang masih berpeluang lolos.',
+    note: 'Lihat posisi tim, perolehan poin, dan siapa yang masih berpeluang lolos.',
     status: 'Aktif',
   },
 };

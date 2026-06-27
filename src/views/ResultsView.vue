@@ -32,21 +32,44 @@ const latestSummary = computed(() => {
 });
 const totalGroups = computed(() => Array.isArray(currentCat.value.groups) ? currentCat.value.groups.length : 0);
 const totalScheduleRows = computed(() => currentSchedule.value.reduce((total, day) => total + (Array.isArray(day.rows) ? day.rows.length : 0), 0));
+const totalResultsRows = computed(() => currentMatches.value.length);
 const nextCountdown = computed(() => (nextMatch.value ? formatCountdown(nextMatch.value.target.getTime() - Date.now()) : '--:--'));
 const nextMatchLabel = computed(() => (nextMatch.value ? `${nextMatch.value.row.a} vs ${nextMatch.value.row.b}` : 'Belum ada jadwal'));
 const featuredGroup = computed(() => {
   const groups = Array.isArray(currentCat.value.groups) ? currentCat.value.groups : [];
   return groups[0] || null;
 });
+const homeStats = computed(() => [
+  {
+    label: 'Jadwal terdekat',
+    value: nextMatchLabel.value,
+    hint: nextMatch.value ? `Mulai dalam ${nextCountdown.value}` : 'Belum ada jadwal lanjutan',
+  },
+  {
+    label: 'Skor terbaru',
+    value: latestSummary.value ? `${latestSummary.value.left} vs ${latestSummary.value.right}` : 'Belum ada skor',
+    hint: latestSummary.value ? `Status pertandingan ${latestSummary.value.status}` : 'Menunggu pembaruan skor',
+  },
+  {
+    label: 'Grup aktif',
+    value: `${totalGroups.value}`,
+    hint: currentCat.value.category || currentCat.value.label || 'Kategori saat ini',
+  },
+  {
+    label: 'Total hasil',
+    value: `${totalResultsRows.value}`,
+    hint: 'Skor yang sudah dipublikasikan',
+  },
+]);
 const pwa = usePwaActions(() => null);
 
 const mobileHomeSlides = computed(() => [
   {
     key: 'next',
-    label: 'Pertandingan berikutnya',
+    label: 'Jadwal terdekat',
     leftTeam: nextMatch.value?.row.a || 'Belum ada jadwal',
     rightTeam: nextMatch.value?.row.b || 'Belum ada jadwal',
-    description: nextMatch.value ? `${nextMatch.value.day.date} - ${nextMatch.value.row.time}` : 'Jadwal belum tersedia',
+    description: nextMatch.value ? `${nextMatch.value.day.date} · ${nextMatch.value.row.time}` : 'Jadwal untuk kategori ini belum tersedia',
     meta: nextCountdown.value,
     badge: 'Jadwal',
     variant: 'next',
@@ -55,9 +78,9 @@ const mobileHomeSlides = computed(() => [
   },
   {
     key: 'score',
-    label: 'Skor terakhir',
+    label: 'Skor terbaru',
     title: latestSummary.value?.a || 'Belum ada skor',
-    description: latestSummary.value ? `${latestSummary.value.left} vs ${latestSummary.value.right}` : 'Tunggu hasil terbaru masuk',
+    description: latestSummary.value ? `${latestSummary.value.left} vs ${latestSummary.value.right}` : 'Menunggu pembaruan skor terbaru',
     meta: latestSummary.value?.b || 'Hasil terbaru',
     badge: latestSummary.value?.status || 'FT',
     variant: 'score',
@@ -66,10 +89,10 @@ const mobileHomeSlides = computed(() => [
   },
   {
     key: 'group',
-    label: 'Ringkasan klasemen',
+    label: 'Klasemen ringkas',
     title: featuredGroup.value?.group || 'Klasemen',
-    description: featuredGroup.value?.rows?.[0]?.team || 'Belum ada data grup',
-    meta: featuredGroup.value?.rows?.[0]?.form || 'Form belum tersedia',
+    description: featuredGroup.value?.rows?.[0]?.team || 'Belum ada data klasemen',
+    meta: featuredGroup.value?.rows?.[0]?.form || 'Belum tersedia',
     badge: `Grup ${totalGroups.value}`,
     variant: 'group',
     to: { name: 'groups', params: { categorySlug: getCategorySlug(activeCat.value) } },
@@ -165,7 +188,7 @@ onBeforeUnmount(() => {
         <div class="lead-head mobile-home-head">
           <div>
             <div class="lead-title">Beranda</div>
-            <div class="mobile-home-kicker">Ringkasan cepat turnamen</div>
+            <div class="mobile-home-kicker">Pusat informasi pertandingan hari ini</div>
           </div>
           <div class="lead-tag">{{ currentCat.category || 'Kategori' }}</div>
         </div>
@@ -178,6 +201,21 @@ onBeforeUnmount(() => {
             <span class="mobile-home-badge">Kategori {{ currentCat.cat }}</span>
             <span class="mobile-home-badge">Grup {{ totalGroups }}</span>
             <span class="mobile-home-badge">Jadwal {{ totalScheduleRows }}</span>
+          </div>
+        </div>
+        <div class="home-summary home-summary-mobile">
+          <div class="home-summary-head">
+            <div>
+              <div class="home-summary-title">Informasi Penting</div>
+              <div class="home-summary-note">Informasi inti yang paling sering dibutuhkan penonton.</div>
+            </div>
+          </div>
+          <div class="home-summary-grid">
+            <article v-for="stat in homeStats" :key="stat.label" class="home-summary-card">
+              <span class="home-summary-label">{{ stat.label }}</span>
+              <strong class="home-summary-value">{{ stat.value }}</strong>
+              <small class="home-summary-hint">{{ stat.hint }}</small>
+            </article>
           </div>
         </div>
         <div class="mobile-home-carousel-shell">
@@ -245,6 +283,22 @@ onBeforeUnmount(() => {
         </div>
       </section>
     </template>
+
+    <section class="section home-summary home-summary-desktop" aria-label="informasi penting">
+      <div class="section-head">
+        <div>
+          <h2>Informasi Penting</h2>
+          <p>Informasi inti yang paling sering dibutuhkan penonton.</p>
+        </div>
+      </div>
+      <div class="home-summary-grid">
+        <article v-for="stat in homeStats" :key="stat.label" class="home-summary-card">
+          <span class="home-summary-label">{{ stat.label }}</span>
+          <strong class="home-summary-value">{{ stat.value }}</strong>
+          <small class="home-summary-hint">{{ stat.hint }}</small>
+        </article>
+      </div>
+    </section>
 
     <section class="section results-desktop-only" :aria-label="currentCat.category || currentCat.label || 'Kategori'">
       <div class="section-head">
