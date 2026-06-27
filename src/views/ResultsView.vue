@@ -228,7 +228,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </section>
-      <section v-else-if="leadMatch" class="lead lead-desktop-only" aria-label="hasil terbaru">
+      <section v-if="leadMatch" class="lead lead-desktop-only" aria-label="hasil terbaru">
         <div class="lead-head">
           <div class="lead-title">Skor Terakhir</div>
           <div class="lead-tag">{{ leadScore.status }}</div>

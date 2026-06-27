@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { buildMobileNav } from '../utils/competition.js';
 
 const props = defineProps({
@@ -15,6 +15,7 @@ const props = defineProps({
 });
 
 const mobileNavItems = computed(() => buildMobileNav(props.page, props.activeCat));
+const desktopMenuOpen = ref(false);
 </script>
 
 <template>
@@ -25,6 +26,33 @@ const mobileNavItems = computed(() => buildMobileNav(props.page, props.activeCat
           <div>
             <div class="eyebrow">{{ eyebrow }}</div>
             <h1>{{ title }}</h1>
+          </div>
+          <div class="desktop-nav-wrap">
+            <QBtn
+              round
+              flat
+              class="desktop-nav-trigger"
+              icon="menu"
+              aria-label="Pilihan halaman"
+            >
+              <QMenu v-model="desktopMenuOpen" anchor="bottom right" self="top right">
+                <div class="desktop-nav-menu" role="menu" aria-label="Pilihan halaman">
+                  <RouterLink
+                    v-for="item in mobileNavItems"
+                    :key="item.to.name"
+                    class="desktop-nav-item"
+                    :class="{ active: item.active }"
+                    :to="item.to"
+                    role="menuitem"
+                    :aria-current="item.active ? 'page' : undefined"
+                    @click="desktopMenuOpen = false"
+                  >
+                    <QIcon :name="item.icon" class="desktop-nav-icon" />
+                    <span>{{ item.label }}</span>
+                  </RouterLink>
+                </div>
+              </QMenu>
+            </QBtn>
           </div>
         </div>
         <p class="sub">{{ subtitle }}</p>

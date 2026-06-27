@@ -115,6 +115,49 @@ body{
   gap:12px;
 }
 
+.desktop-nav-wrap{
+  flex-shrink:0;
+}
+
+.desktop-nav-trigger{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+  color:var(--text);
+  box-shadow:0 6px 16px rgba(15,23,42,.05);
+}
+
+.desktop-nav-menu{
+  min-width:188px;
+  padding:8px;
+  display:grid;
+  gap:6px;
+}
+
+.desktop-nav-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:14px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:var(--fs-md);
+  font-weight:800;
+  line-height:1;
+}
+
+.desktop-nav-item.active{
+  background:rgba(214,31,99,.08);
+  color:var(--accent);
+}
+
+.desktop-nav-icon{
+  font-size:18px;
+}
+
 .eyebrow{
   display:inline-flex;
   align-items:center;
@@ -927,6 +970,12 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   display:none;
 }
 
+@media (min-width: 761px){
+  .desktop-nav-wrap{
+    display:block;
+  }
+}
+
 @media (max-width: 760px){
   :root{
     --fs-xxs:8px;
@@ -1000,6 +1049,9 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .status-actions{
     gap:6px;
+  }
+  .desktop-nav-wrap{
+    display:none;
   }
   .tab-full{display:none}
   .tab-short{display:inline}
