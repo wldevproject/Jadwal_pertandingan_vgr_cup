@@ -96,9 +96,9 @@ export function buildCategoryTabs(page, activeCategory = DEFAULT_CATEGORY) {
 
 export function buildMobileNav(activePage, activeCategory = DEFAULT_CATEGORY) {
   return [
-    { name: 'results', label: activePage === 'results' ? 'Beranda' : 'Hasil', active: activePage === 'results', icon: 'score' },
-    { name: 'schedule', label: 'Jadwal', active: activePage === 'schedule', icon: 'calendar' },
-    { name: 'groups', label: 'Klasemen', active: activePage === 'groups', icon: 'chart' },
+    { name: 'results', label: activePage === 'results' ? 'Beranda' : 'Hasil', active: activePage === 'results', icon: 'home' },
+    { name: 'schedule', label: 'Jadwal', active: activePage === 'schedule', icon: 'event' },
+    { name: 'groups', label: 'Klasemen', active: activePage === 'groups', icon: 'leaderboard' },
   ].map((item) => ({
     ...item,
     to: {

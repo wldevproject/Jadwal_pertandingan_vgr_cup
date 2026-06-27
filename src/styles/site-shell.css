@@ -13,6 +13,16 @@
   --gold:#f4c95f;
   --shadow:0 10px 24px rgba(15,23,42,.08);
   --radius:18px;
+  --fs-xxs:8px;
+  --fs-xs:9px;
+  --fs-sm:10px;
+  --fs-md:11px;
+  --fs-lg:12px;
+  --fs-xl:13px;
+  --fs-2xl:14px;
+  --fs-3xl:15px;
+  --fs-4xl:16px;
+  --fs-5xl:17px;
 }
 
 *{box-sizing:border-box}
@@ -54,13 +64,13 @@ body{
 }
 .pwa-banner-copy strong{
   font-family:"Montserrat", sans-serif;
-  font-size:12px;
+  font-size:var(--fs-lg);
   font-weight:800;
   color:var(--text);
   letter-spacing:.02em;
 }
 .pwa-banner-copy span{
-  font-size:11px;
+  font-size:var(--fs-md);
   color:var(--muted);
   line-height:1.45;
 }
@@ -114,7 +124,7 @@ body{
   background:rgba(214,31,99,.08);
   color:var(--accent);
   font-family:"Montserrat", sans-serif;
-  font-size:11px;
+  font-size:var(--fs-md);
   font-weight:800;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -131,7 +141,7 @@ h1{
 .sub{
   margin:0;
   color:var(--muted);
-  font-size:13px;
+  font-size:var(--fs-xl);
   line-height:1.55;
   max-width:760px;
 }
@@ -162,7 +172,7 @@ h1{
   border-radius:999px;
   background:rgba(23,166,115,.1);
   color:var(--good);
-  font-size:11px;
+  font-size:var(--fs-md);
   font-weight:800;
   letter-spacing:.02em;
 }
@@ -450,14 +460,14 @@ h1{
 .lead-meta strong{
   display:block;
   font-family:"Montserrat", sans-serif;
-  font-size:17px;
+  font-size:var(--fs-5xl);
   color:#ff6aa8;
   line-height:1;
 }
 .lead-meta span{
   display:block;
   margin-top:5px;
-  font-size:9px;
+  font-size:var(--fs-xs);
   color:#d7dde8;
   letter-spacing:.06em;
   text-transform:uppercase;
@@ -481,13 +491,13 @@ h1{
 .section-head h2{
   margin:0;
   font-family:"Montserrat", sans-serif;
-  font-size:15px;
+  font-size:var(--fs-3xl);
   letter-spacing:-.02em;
 }
 .section-head p{
   margin:4px 0 0;
   color:var(--muted);
-  font-size:11px;
+  font-size:var(--fs-md);
   line-height:1.5;
 }
 .chip{
@@ -497,7 +507,7 @@ h1{
   border:1px solid var(--line);
   color:#344054;
   font-family:"Montserrat", sans-serif;
-  font-size:10px;
+  font-size:var(--fs-sm);
   font-weight:800;
   text-transform:uppercase;
   white-space:nowrap;
@@ -516,7 +526,7 @@ h1{
   border:1px solid var(--line);
   background:var(--surface-2);
   padding:8px 11px;
-  font-size:10px;
+  font-size:var(--fs-sm);
   font-weight:800;
   line-height:1;
   letter-spacing:.02em;
@@ -548,14 +558,14 @@ h1{
 }
 .category-title{
   font-family:"Montserrat", sans-serif;
-  font-size:15px;
+  font-size:var(--fs-3xl);
   font-weight:800;
   letter-spacing:-.02em;
 }
 .category-note{
   margin-top:4px;
   color:var(--muted);
-  font-size:11px;
+  font-size:var(--fs-md);
   line-height:1.4;
 }
 
@@ -587,7 +597,7 @@ h1{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  font-size:14px;
+  font-size:var(--fs-2xl);
   font-weight:600;
   color:var(--text);
 }
@@ -603,7 +613,7 @@ h1{
 }
 .team-score{
   font-family:"Montserrat", sans-serif;
-  font-size:16px;
+  font-size:var(--fs-4xl);
   font-weight:800;
   color:var(--text);
   min-width:26px;
@@ -626,7 +636,7 @@ h1{
   background:var(--accent);
   color:#fff;
   font-family:"Montserrat", sans-serif;
-  font-size:11px;
+  font-size:var(--fs-md);
   font-weight:800;
   letter-spacing:.06em;
 }
@@ -715,7 +725,7 @@ h1{
 }
 .date{
   font-family:"Montserrat", sans-serif;
-  font-size:12px;
+  font-size:var(--fs-lg);
   font-weight:800;
 }
 .day-chip{
@@ -724,7 +734,7 @@ h1{
   background:rgba(214,31,99,.08);
   color:var(--accent);
   font-family:"Montserrat", sans-serif;
-  font-size:9px;
+  font-size:var(--fs-xs);
   font-weight:800;
   text-transform:uppercase;
 }
@@ -748,7 +758,7 @@ h1{
 }
 .time{
   font-family:"Montserrat", sans-serif;
-  font-size:10px;
+  font-size:var(--fs-sm);
   font-weight:800;
   color:var(--accent);
   letter-spacing:.04em;
@@ -775,13 +785,13 @@ h1{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  font-size:12px;
+  font-size:var(--fs-lg);
   font-weight:800;
   color:var(--text);
 }
 .vs{
   color:var(--muted-2);
-  font-size:10px;
+  font-size:var(--fs-sm);
   font-weight:800;
   text-align:center;
 }
@@ -913,18 +923,23 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   display:none;
 }
 
-.mobile-nav{
+.mobile-nav-shell{
   display:none;
 }
 
-.mobile-nav-icon svg{
-  width:20px;
-  height:20px;
-  fill:currentColor;
-  display:block;
-}
-
 @media (max-width: 760px){
+  :root{
+    --fs-xxs:8px;
+    --fs-xs:8px;
+    --fs-sm:9px;
+    --fs-md:10px;
+    --fs-lg:11px;
+    --fs-xl:12px;
+    --fs-2xl:13px;
+    --fs-3xl:14px;
+    --fs-4xl:15px;
+    --fs-5xl:16px;
+  }
   .pwa-banner{
     margin:10px 10px 0;
     padding:10px 12px;
@@ -936,7 +951,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     justify-content:space-between;
   }
   .wrap{
-    padding-bottom:calc(88px + env(safe-area-inset-bottom));
+    padding-bottom:calc(112px + env(safe-area-inset-bottom));
   }
   .lead{
     margin-top:12px;
@@ -988,42 +1003,57 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .tab-full{display:none}
   .tab-short{display:inline}
-  .mobile-nav{
-    position:sticky;
+  .mobile-nav-shell{
+    position:fixed;
+    left:10px;
+    right:10px;
     bottom:calc(10px + env(safe-area-inset-bottom));
     z-index:20;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:8px;
-    margin-top:14px;
-    padding:10px;
+    display:block;
+    margin-top:0;
+    padding:6px;
     border:1px solid var(--line);
-    border-radius:20px;
+    border-radius:18px;
     background:rgba(255,255,255,.94);
-    box-shadow:0 14px 30px rgba(15,23,42,.12);
+    box-shadow:0 10px 24px rgba(15,23,42,.10);
     backdrop-filter:blur(12px);
   }
+  .mobile-nav{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px;
+  }
   .mobile-nav-item{
-    text-decoration:none;
+    min-height:44px;
+    border-radius:14px;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
     color:var(--muted);
+    text-decoration:none;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:5px;
-    padding:10px 8px;
-    border-radius:16px;
-    border:1px solid transparent;
+    gap:3px;
+    padding:6px 6px;
     background:transparent;
-    font-size:10px;
+    font-size:var(--fs-sm);
     font-weight:800;
+    width:100%;
+    flex:1 1 0;
   }
   .mobile-nav-item.active{
     background:var(--surface-2);
     border-color:var(--line);
     color:var(--accent);
+    box-shadow:inset 0 0 0 1px rgba(214,31,99,.08);
+  }
+  .mobile-nav-icon{
+    font-size:16px;
   }
   .mobile-nav-label{
+    font-size:var(--fs-xs);
+    font-weight:800;
     line-height:1;
   }
 
@@ -1033,7 +1063,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   .mobile-home-kicker{
     margin-top:4px;
     color:#d7dde8;
-    font-size:10px;
+    font-size:var(--fs-sm);
     line-height:1.35;
   }
   .mobile-home-hero{
@@ -1050,12 +1080,12 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .mobile-home-hero-copy strong{
     font-family:"Montserrat", sans-serif;
-    font-size:14px;
+    font-size:var(--fs-2xl);
     font-weight:800;
     letter-spacing:-.02em;
   }
   .mobile-home-hero-copy span{
-    font-size:10px;
+    font-size:var(--fs-sm);
     color:#d7dde8;
     line-height:1.35;
   }
@@ -1070,7 +1100,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     background:rgba(214,31,99,.16);
     color:#ff7db0;
     font-family:"Montserrat", sans-serif;
-    font-size:8px;
+    font-size:var(--fs-xxs);
     font-weight:800;
     text-transform:uppercase;
     letter-spacing:.04em;
@@ -1171,7 +1201,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .mobile-home-card-label{
     font-family:"Montserrat", sans-serif;
-    font-size:9px;
+    font-size:var(--fs-xs);
     font-weight:800;
     text-transform:uppercase;
     letter-spacing:.1em;
@@ -1179,7 +1209,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .mobile-home-card strong{
     font-family:"Montserrat", sans-serif;
-    font-size:14px;
+    font-size:var(--fs-2xl);
     font-weight:800;
     letter-spacing:-.02em;
     color:#fff;
@@ -1187,7 +1217,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   .mobile-home-card span,
   .mobile-home-card small{
     color:#d7dde8;
-    font-size:10px;
+    font-size:var(--fs-sm);
     line-height:1.35;
   }
   .mobile-home-card-foot{
@@ -1204,13 +1234,13 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     background:rgba(214,31,99,.16);
     color:#ff7db0;
     font-family:"Montserrat", sans-serif;
-    font-size:8px;
+    font-size:var(--fs-xxs);
     font-weight:800;
     text-transform:uppercase;
   }
   .mobile-home-link{
     color:#fff;
-    font-size:9px;
+    font-size:var(--fs-xs);
     font-weight:800;
     text-decoration:none;
     letter-spacing:.02em;
@@ -1243,11 +1273,71 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     margin-bottom:10px;
   }
   .date{
-    font-size:12px;
+    font-size:var(--fs-lg);
   }
   .day-chip{
     padding:5px 9px;
-    font-size:9px;
+    font-size:var(--fs-xs);
+  }
+  .group-head{
+    margin-bottom:8px;
+  }
+  .group-name{
+    font-size:var(--fs-lg);
+  }
+  .group-pill{
+    padding:5px 8px;
+    font-size:var(--fs-xs);
+  }
+  .group-card table{
+    display:block;
+  }
+  .group-card thead{
+    display:none;
+  }
+  .group-card tbody{
+    display:grid;
+    gap:8px;
+  }
+  .group-card tbody tr{
+    display:grid;
+    grid-template-columns:24px minmax(0,1fr) auto auto;
+    gap:8px;
+    align-items:center;
+    padding:8px 10px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--surface);
+  }
+  .group-card tbody tr.qualified{
+    background:rgba(23,166,115,.06);
+  }
+  .group-card tbody td{
+    display:block;
+    padding:0;
+    border:none;
+  }
+  .group-card .rank{
+    width:auto;
+  }
+  .group-card .team{
+    font-size:var(--fs-lg);
+    line-height:1.3;
+  }
+  .group-card .pts{
+    min-width:24px;
+    text-align:right;
+  }
+  .group-card td:nth-child(4),
+  .group-card td:nth-child(5),
+  .group-card td:nth-child(6){
+    display:none;
+  }
+  .group-card .form{
+    justify-self:end;
+    text-align:right;
+    white-space:nowrap;
+    font-size:var(--fs-xs);
   }
   .schedule-row{
     gap:7px;
@@ -1259,7 +1349,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     width:min(100%, 240px);
   }
   .schedule-team{
-    font-size:12px;
+    font-size:var(--fs-lg);
   }
   .section{
     margin-top:8px;
@@ -1289,7 +1379,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .time{
     width:auto;
-    font-size:10px;
+    font-size:var(--fs-xs);
   }
   .row-match{
     grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);
@@ -1315,7 +1405,7 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   .schedule-vs{
     justify-self:center;
     text-align:center;
-    font-size:10px;
+    font-size:var(--fs-xs);
   }
   .tabs{
     gap:5px;
@@ -1328,8 +1418,20 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
     width:38px;
     height:38px;
   }
-  th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none}
-  th:nth-child(6),td:nth-child(6){white-space:nowrap}
+  .results-mobile-only .section-head{
+    gap:6px;
+    margin-bottom:10px;
+  }
+  .results-mobile-only .section-head p{
+    display:none;
+  }
+  .results-mobile-only .chip{
+    padding:5px 8px;
+    font-size:9px;
+  }
+  .results-mobile-only .card-grid{
+    gap:6px;
+  }
   .mobile-nav{
     bottom:calc(8px + env(safe-area-inset-bottom));
     padding:8px;

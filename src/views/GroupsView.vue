@@ -3,8 +3,9 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import AppShell from '../components/AppShell.vue';
 import GroupCard from '../components/GroupCard.vue';
+import { usePwaActions } from '../composables/usePwaActions.js';
 import { useCompetitionStore } from '../stores/competition.js';
-import { buildCategoryTabs, getPageCopy, parseCategory } from '../utils/competition.js';
+import { buildCategoryTabs, getPageCopy, iconSvg, parseCategory } from '../utils/competition.js';
 
 const store = useCompetitionStore();
 const route = useRoute();
@@ -15,6 +16,7 @@ const activeCat = computed(() => parseCategory(route.query.cat));
 const tabs = computed(() => buildCategoryTabs(page, activeCat.value));
 const currentCat = computed(() => store.getItemByCat(activeCat.value));
 const groups = computed(() => Array.isArray(currentCat.value.groups) ? currentCat.value.groups : []);
+const pwa = usePwaActions(() => null);
 </script>
 
 <template>
@@ -30,7 +32,17 @@ const groups = computed(() => Array.isArray(currentCat.value.groups) ? currentCa
     :note="pageCopy.note"
   >
     <template #statusActions>
-      <button class="action-btn primary" data-install-pwa hidden>Pasang Aplikasi</button>
+      <button
+        v-if="pwa.installAvailable"
+        class="action-btn action-btn-icon primary"
+        data-install-pwa
+        type="button"
+        aria-label="Pasang aplikasi"
+        title="Pasang aplikasi"
+        @click="pwa.promptInstall"
+      >
+        <span class="action-btn-icon-mark" v-html="iconSvg('install')" />
+      </button>
     </template>
 
     <template #lead>

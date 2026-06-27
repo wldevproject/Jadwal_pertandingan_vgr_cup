@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   base: './',
   plugins: [
-    vue(),
+    vue({
+      template: {
+        transformAssetUrls,
+      },
+    }),
+    quasar({
+      autoImportComponentCase: 'pascal',
+      sassVariables: false,
+    }),
     VitePWA({
       strategies: 'injectManifest',
       srcDir: 'src',
