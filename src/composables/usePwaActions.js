@@ -18,13 +18,13 @@ async function notifyNow(title, body) {
       const registration = await navigator.serviceWorker.ready;
       await registration.showNotification(title, {
         body,
-        icon: './app-icon.svg',
-        badge: './app-icon.svg',
+        icon: '/app-icon.svg',
+        badge: '/app-icon.svg',
         tag: 'vgr5-reminder',
         renotify: true,
       });
     } else {
-      new Notification(title, { body, icon: './app-icon.svg' });
+      new Notification(title, { body, icon: '/app-icon.svg' });
     }
 
     return true;

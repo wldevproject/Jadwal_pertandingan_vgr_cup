@@ -5,14 +5,14 @@ import AppShell from '../components/AppShell.vue';
 import MatchCard from '../components/MatchCard.vue';
 import { usePwaActions } from '../composables/usePwaActions.js';
 import { useCompetitionStore } from '../stores/competition.js';
-import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, formatMatchScore, getPageCopy, iconSvg, parseCategory } from '../utils/competition.js';
+import { buildCategoryTabs, findNextScheduleEntry, formatCountdown, formatMatchScore, getCategorySlug, getPageCopy, iconSvg, parseCategory } from '../utils/competition.js';
 
 const store = useCompetitionStore();
 const route = useRoute();
 const page = 'results';
 const pageCopy = getPageCopy(page);
 
-const activeCat = computed(() => parseCategory(route.query.cat));
+const activeCat = computed(() => parseCategory(route.params.categorySlug ?? route.query.cat));
 const tabs = computed(() => buildCategoryTabs(page, activeCat.value));
 const currentCat = computed(() => store.getItemByCat(activeCat.value));
 const currentMatches = computed(() => Array.isArray(currentCat.value.results) ? currentCat.value.results : []);
@@ -44,12 +44,13 @@ const mobileHomeSlides = computed(() => [
   {
     key: 'next',
     label: 'Pertandingan berikutnya',
-    title: nextMatchLabel.value,
+    leftTeam: nextMatch.value?.row.a || 'Belum ada jadwal',
+    rightTeam: nextMatch.value?.row.b || 'Belum ada jadwal',
     description: nextMatch.value ? `${nextMatch.value.day.date} - ${nextMatch.value.row.time}` : 'Jadwal belum tersedia',
     meta: nextCountdown.value,
     badge: 'Jadwal',
     variant: 'next',
-    to: { name: 'schedule', query: { cat: String(activeCat.value) } },
+    to: { name: 'schedule', params: { categorySlug: getCategorySlug(activeCat.value) } },
     cta: 'Lihat jadwal',
   },
   {
@@ -60,7 +61,7 @@ const mobileHomeSlides = computed(() => [
     meta: latestSummary.value?.b || 'Hasil terbaru',
     badge: latestSummary.value?.status || 'FT',
     variant: 'score',
-    to: { name: 'results', query: { cat: String(activeCat.value) } },
+    to: { name: 'results', params: { categorySlug: getCategorySlug(activeCat.value) } },
     cta: 'Detail hasil',
   },
   {
@@ -71,7 +72,7 @@ const mobileHomeSlides = computed(() => [
     meta: featuredGroup.value?.rows?.[0]?.form || 'Form belum tersedia',
     badge: `Grup ${totalGroups.value}`,
     variant: 'group',
-    to: { name: 'groups', query: { cat: String(activeCat.value) } },
+    to: { name: 'groups', params: { categorySlug: getCategorySlug(activeCat.value) } },
     cta: 'Lihat grup',
   },
 ]);
@@ -193,9 +194,20 @@ onBeforeUnmount(() => {
             >
               <div class="mobile-home-card-label">{{ slide.label }}</div>
               <div class="mobile-home-panel-body">
-                <strong>{{ slide.title }}</strong>
-                <span>{{ slide.description }}</span>
-                <small>{{ slide.meta }}</small>
+                <template v-if="slide.variant === 'next'">
+                  <div class="mobile-home-matchline">
+                    <span class="mobile-home-team-left">{{ slide.leftTeam }}</span>
+                    <span class="mobile-home-vs">vs</span>
+                    <span class="mobile-home-team-right">{{ slide.rightTeam }}</span>
+                  </div>
+                  <span class="mobile-home-next-meta">{{ slide.description }}</span>
+                  <small class="mobile-home-next-countdown">{{ slide.meta }}</small>
+                </template>
+                <template v-else>
+                  <strong>{{ slide.title }}</strong>
+                  <span>{{ slide.description }}</span>
+                  <small>{{ slide.meta }}</small>
+                </template>
               </div>
               <div class="mobile-home-card-foot">
                 <span class="mobile-home-pill">{{ slide.badge }}</span>

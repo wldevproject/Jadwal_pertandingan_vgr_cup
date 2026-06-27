@@ -5,7 +5,7 @@ import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [
     vue({
       template: {
@@ -26,9 +26,9 @@ export default defineConfig({
         name: 'VGR 5 Badminton Cup 2026',
         short_name: 'VGR 5 Cup',
         description: 'Papan skor, jadwal, dan klasemen turnamen badminton VGR 5 Badminton Cup 2026.',
-        id: './index.html',
-        start_url: './index.html#/results?cat=16',
-        scope: './',
+        id: '/',
+        start_url: '/results/putra',
+        scope: '/',
         display: 'standalone',
         display_override: ['window-controls-overlay', 'standalone'],
         background_color: '#f3f5fa',
@@ -39,22 +39,22 @@ export default defineConfig({
           {
             name: 'Hasil',
             short_name: 'Hasil',
-            url: './index.html#/results?cat=16',
+            url: '/results/putra',
           },
           {
             name: 'Jadwal',
             short_name: 'Jadwal',
-            url: './index.html#/schedule?cat=16',
+            url: '/schedule/putra',
           },
           {
             name: 'Klasemen',
             short_name: 'Klasemen',
-            url: './index.html#/groups?cat=16',
+            url: '/groups/putra',
           },
         ],
         icons: [
           {
-            src: './app-icon.svg',
+            src: '/app-icon.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any maskable',

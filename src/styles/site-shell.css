@@ -685,36 +685,36 @@ h1{
   box-shadow:0 6px 16px rgba(15,23,42,.04);
 }
 .day-featured{
-  background:linear-gradient(180deg, #131a2b 0%, #1a2235 100%);
-  color:#fff;
-  border-color:rgba(148,163,184,.16);
-  box-shadow:0 14px 28px rgba(15,23,42,.16);
+  background:linear-gradient(180deg, rgba(214,31,99,.06) 0%, #f8faff 58%, #f1f4fb 100%);
+  color:var(--text);
+  border-color:rgba(214,31,99,.12);
+  box-shadow:0 10px 22px rgba(15,23,42,.06);
 }
 .day-featured .date{
-  color:#fff;
+  color:var(--text);
 }
 .day-featured .day-chip{
-  background:rgba(214,31,99,.16);
-  color:#ff7db0;
-  border-color:transparent;
+  background:rgba(214,31,99,.08);
+  color:var(--accent);
+  border-color:rgba(214,31,99,.08);
 }
 .day-featured .row{
-  border-bottom:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(214,31,99,.08);
 }
 .day-featured .time{
-  color:#ff7db0;
+  color:var(--accent);
 }
 .day-featured .team-left,
 .day-featured .team-right{
-  color:#fff;
+  color:var(--text);
 }
 .day-featured .vs{
-  color:#d7dde8;
+  color:var(--muted-2);
 }
 .day-featured .tag{
-  background:rgba(214,31,99,.16);
-  color:#ff7db0;
-  border-color:transparent;
+  background:rgba(214,31,99,.08);
+  color:var(--accent);
+  border-color:rgba(214,31,99,.08);
 }
 .day-head{
   display:flex;
@@ -1167,6 +1167,54 @@ tbody tr.qualified{background:rgba(23,166,115,.06)}
   }
   .mobile-home-next{
     background:linear-gradient(180deg, rgba(214,31,99,.18), rgba(19,26,43,.96));
+  }
+  .mobile-home-next .mobile-home-panel-body{
+    display:grid;
+    gap:4px;
+    justify-items:stretch;
+    text-align:center;
+  }
+  .mobile-home-matchline{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    gap:8px;
+    width:100%;
+  }
+  .mobile-home-team-left,
+  .mobile-home-team-right{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-family:"Montserrat", sans-serif;
+    font-size:var(--fs-2xl);
+    font-weight:800;
+    color:#fff;
+  }
+  .mobile-home-team-left{
+    text-align:right;
+  }
+  .mobile-home-team-right{
+    text-align:left;
+  }
+  .mobile-home-vs{
+    font-family:"Montserrat", sans-serif;
+    font-size:var(--fs-sm);
+    font-weight:800;
+    color:#d7dde8;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .mobile-home-next-meta{
+    font-size:var(--fs-sm);
+    color:#d7dde8;
+    line-height:1.35;
+  }
+  .mobile-home-next-countdown{
+    font-size:var(--fs-xs);
+    color:#d7dde8;
+    line-height:1.2;
   }
   .mobile-home-score{
     background:linear-gradient(180deg, rgba(23,166,115,.18), rgba(19,26,43,.96));

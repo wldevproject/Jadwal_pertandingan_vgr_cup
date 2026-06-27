@@ -6,6 +6,26 @@ import '@quasar/extras/material-icons/material-icons.css';
 import { router } from './router/index.js';
 import App from './App.vue';
 import './styles/main.css';
+import { getCategorySlug, parseCategory } from './utils/competition.js';
+
+function migrateLegacyHashRoute() {
+  if (typeof window === 'undefined') return;
+
+  const hash = window.location.hash || '';
+  if (!hash.startsWith('#/')) return;
+
+  const [rawPath, rawQuery = ''] = hash.slice(2).split('?');
+  const page = rawPath.split('/').filter(Boolean)[0];
+  if (!['results', 'schedule', 'groups'].includes(page)) return;
+
+  const params = new URLSearchParams(rawQuery);
+  const categorySlug = getCategorySlug(parseCategory(params.get('cat')));
+  window.history.replaceState(
+    {},
+    '',
+    `/${page}/${categorySlug}`
+  );
+}
 
 const app = createApp(App);
 
@@ -24,6 +44,8 @@ app.use(Quasar, {
   },
 });
 app.use(router);
+
+migrateLegacyHashRoute();
 
 router.isReady().then(() => {
   app.mount('#app');

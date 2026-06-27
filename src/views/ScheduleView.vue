@@ -12,7 +12,7 @@ const route = useRoute();
 const page = 'schedule';
 const pageCopy = getPageCopy(page);
 
-const activeCat = computed(() => parseCategory(route.query.cat));
+const activeCat = computed(() => parseCategory(route.params.categorySlug ?? route.query.cat));
 const tabs = computed(() => buildCategoryTabs(page, activeCat.value));
 const currentCat = computed(() => store.getItemByCat(activeCat.value));
 const days = computed(() => Array.isArray(currentCat.value.schedule) ? currentCat.value.schedule : []);

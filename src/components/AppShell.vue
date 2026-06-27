@@ -37,7 +37,7 @@ const mobileNavItems = computed(() => buildMobileNav(props.page, props.activeCat
         <nav v-if="tabs.length" class="tabs" aria-label="Kategori">
           <RouterLink
             v-for="tab in tabs"
-            :key="tab.to.name + ':' + tab.to.query.cat"
+            :key="tab.to.name + ':' + (tab.to.params?.categorySlug || '')"
             :to="tab.to"
             :class="{ active: tab.active }"
           >

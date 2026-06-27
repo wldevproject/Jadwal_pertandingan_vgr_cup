@@ -1,5 +1,13 @@
 export const APP_NAME = 'VGR 5 Badminton Cup 2026';
 export const DEFAULT_CATEGORY = 16;
+export const CATEGORY_OPTIONS = [
+  { cat: 14, slug: 'putri', label: 'Ganda Putri', shortLabel: 'Putri' },
+  { cat: 15, slug: 'campuran', label: 'Ganda Campuran', shortLabel: 'Camp' },
+  { cat: 16, slug: 'putra', label: 'Ganda Putra', shortLabel: 'Putra' },
+];
+
+const CATEGORY_BY_SLUG = Object.fromEntries(CATEGORY_OPTIONS.map((item) => [item.slug, item.cat]));
+const CATEGORY_BY_CAT = Object.fromEntries(CATEGORY_OPTIONS.map((item) => [item.cat, item.slug]));
 
 const PAGE_COPY = {
   results: {
@@ -50,8 +58,19 @@ export function getPageCopy(page) {
 }
 
 export function parseCategory(value) {
-  const category = Number(value);
-  return [14, 15, 16].includes(category) ? category : DEFAULT_CATEGORY;
+  if (value == null || value === '') return DEFAULT_CATEGORY;
+
+  const normalized = String(value).toLowerCase();
+  if (CATEGORY_BY_SLUG[normalized]) {
+    return CATEGORY_BY_SLUG[normalized];
+  }
+
+  const category = Number(normalized);
+  return CATEGORY_BY_CAT[category] ? category : DEFAULT_CATEGORY;
+}
+
+export function getCategorySlug(category = DEFAULT_CATEGORY) {
+  return CATEGORY_BY_CAT[category] || CATEGORY_BY_CAT[DEFAULT_CATEGORY];
 }
 
 export function getItems(payload) {
@@ -70,26 +89,14 @@ export function selectItem(payload, category = DEFAULT_CATEGORY) {
   };
 }
 
-function categoryLabel(cat) {
-  if (cat === 14) return 'Ganda Putri';
-  if (cat === 15) return 'Ganda Campuran';
-  return 'Ganda Putra';
-}
-
-function categoryShortLabel(cat) {
-  if (cat === 14) return 'Putri';
-  if (cat === 15) return 'Camp';
-  return 'Putra';
-}
-
 export function buildCategoryTabs(page, activeCategory = DEFAULT_CATEGORY) {
-  return [14, 15, 16].map((cat) => ({
-    label: categoryLabel(cat),
-    shortLabel: categoryShortLabel(cat),
-    active: activeCategory === cat,
+  return CATEGORY_OPTIONS.map((item) => ({
+    label: item.label,
+    shortLabel: item.shortLabel,
+    active: activeCategory === item.cat,
     to: {
       name: page,
-      query: { cat: String(cat) },
+      params: { categorySlug: item.slug },
     },
   }));
 }
@@ -103,7 +110,7 @@ export function buildMobileNav(activePage, activeCategory = DEFAULT_CATEGORY) {
     ...item,
     to: {
       name: item.name,
-      query: { cat: String(activeCategory) },
+      params: { categorySlug: getCategorySlug(activeCategory) },
     },
   }));
 }
